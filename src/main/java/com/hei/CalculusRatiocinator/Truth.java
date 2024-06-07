@@ -1,8 +1,8 @@
 package com.hei.CalculusRatiocinator;
 
-public class Mensonge implements Affirmation{
+public class Truth implements Affirmation {
     @Override
     public Boolean eval() {
-        return false;
+        return true;
     }
 }

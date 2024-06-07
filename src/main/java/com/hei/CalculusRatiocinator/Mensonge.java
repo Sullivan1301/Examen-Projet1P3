@@ -1,6 +1,6 @@
 package com.hei.CalculusRatiocinator;
 
-public class Lie implements Affirmation{
+public class Mensonge implements Affirmation{
     @Override
     public Boolean eval() {
         return false;

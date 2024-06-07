@@ -1,6 +1,7 @@
 package com.hei.CalculusRatiocinator;
 
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AffirmationTest {
@@ -39,6 +40,41 @@ public class AffirmationTest {
         Affirmation test = new Et(
                 new Donc(new Ou(verite1, affirmation1True), mensonge1),
                 new Ou(mensonge1, affirmation1True)
+        );
+        assertEquals(false, test.eval());
+    }
+
+
+
+    private final Affirmation verite2 = new Truth("Sullivan est intelligent");
+    private final Affirmation mensonge2 = new Lie("Sullivan est paresseux");
+    private final Affirmation affirmation2True = new SimpleAffirmation(true, "Sullivan est travailleur");
+    private final Affirmation affirmation2False = new SimpleAffirmation(false, "Sullivan est travailleur");
+
+
+    @Test
+    public void testSullivanEstIntelligentEtSullivanEstTravailleur() {
+        Affirmation test = new Ou(verite2, affirmation2False);
+        assertEquals(true, test.eval());
+    }
+
+    @Test
+    public void testSullivanEstParesseuxDoncSullivanEstTravailleur() {
+        Affirmation test = new Donc(mensonge2, affirmation2True);
+        assertEquals(true, test.eval());
+    }
+
+    @Test
+    public void testSullivanEstIntelligentOuSullivanEstTravailleurDoncSullivanEstParesseux() {
+        Affirmation test = new Donc(new Ou(verite2, affirmation2True), mensonge2);
+        assertEquals(false, test.eval());
+    }
+
+    @Test
+    public void testComplexAffirmationSullivan() {
+        Affirmation test = new Et(
+                new Donc(new Ou(verite2, affirmation2True), mensonge2),
+                new Ou(mensonge2, affirmation2True)
         );
         assertEquals(false, test.eval());
     }

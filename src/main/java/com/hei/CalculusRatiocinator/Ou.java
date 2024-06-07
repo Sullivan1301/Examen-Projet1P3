@@ -8,4 +8,9 @@ public class Ou extends ConjonctionDeCoordination {
     public Boolean eval(){
         return left.eval() || right.eval();
     }
+
+    @Override
+    public String getDescrption() {
+        return left.getDescrption() + " ou " +right.getDescrption();
+    }
 }
